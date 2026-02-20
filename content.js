@@ -39,12 +39,12 @@ function updateStyles(config) {
 
 // Cargar configuración inicial
 chrome.storage.sync.get(['hideOneHead', 'hideNavItems', 'hideQuoteHeader', 'compactNavContainer'], function(result) {
-  // Por defecto true si es undefined
+  // Por defecto false si es undefined
   const config = {
-    hideOneHead: result.hideOneHead !== false,
-    hideNavItems: result.hideNavItems !== false,
-    hideQuoteHeader: result.hideQuoteHeader !== false,
-    compactNavContainer: result.compactNavContainer !== false
+    hideOneHead: result.hideOneHead === true,
+    hideNavItems: result.hideNavItems === true,
+    hideQuoteHeader: result.hideQuoteHeader === true,
+    compactNavContainer: result.compactNavContainer === true
   };
   updateStyles(config);
 });
@@ -62,10 +62,10 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
     // Re-leer toda la configuración para asegurar consistencia
     chrome.storage.sync.get(['hideOneHead', 'hideNavItems', 'hideQuoteHeader', 'compactNavContainer'], function(result) {
       const config = {
-        hideOneHead: result.hideOneHead !== false,
-        hideNavItems: result.hideNavItems !== false,
-        hideQuoteHeader: result.hideQuoteHeader !== false,
-        compactNavContainer: result.compactNavContainer !== false
+        hideOneHead: result.hideOneHead === true,
+        hideNavItems: result.hideNavItems === true,
+        hideQuoteHeader: result.hideQuoteHeader === true,
+        compactNavContainer: result.compactNavContainer === true
       };
       updateStyles(config);
     });

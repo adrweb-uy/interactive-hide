@@ -35,10 +35,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Cargar configuración guardada
   chrome.storage.sync.get(['hideOneHead', 'hideNavItems', 'hideQuoteHeader', 'compactNavContainer'], function(result) {
-    checkboxOneHead.checked = result.hideOneHead !== false; // Por defecto true
-    checkboxNavItems.checked = result.hideNavItems !== false; // Por defecto true
-    checkboxQuoteHeader.checked = result.hideQuoteHeader !== false; // Por defecto true
-    checkboxCompactNav.checked = result.compactNavContainer !== false; // Por defecto true
+    checkboxOneHead.checked = result.hideOneHead === true; // Por defecto false
+    checkboxNavItems.checked = result.hideNavItems === true; // Por defecto false
+    checkboxQuoteHeader.checked = result.hideQuoteHeader === true; // Por defecto false
+    checkboxCompactNav.checked = result.compactNavContainer === true; // Por defecto false
   });
 
   // Listeners

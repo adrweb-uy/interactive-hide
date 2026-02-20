@@ -1,0 +1,14 @@
+# Node.js
+node_modules/
+dist/
+
+# Editor
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Extension build
+*.crx

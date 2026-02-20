@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Hide Elements Extension",
+  "version": "1.0",
+  "description": "Una extensión para ocultar elementos en una página web.",
+  "permissions": ["activeTab", "scripting"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ]
+}

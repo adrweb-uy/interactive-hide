@@ -5,7 +5,9 @@ console.log("Extensión Interactive Hide cargada en: " + window.location.href);
 
 // Definir los estilos CSS para ocultar elementos
 const STYLES = {
-  hideOneHead: '.one-head { display: none !important; }'
+  hideOneHead: '.one-head { display: none !important; }',
+  hideNavItems: '.nav-items__next-row.insetx-32.insety-12 { display: none !important; }',
+  hideQuoteHeader: '.quote-details-header { display: none !important; }'
 };
 
 // Crear elemento de estilo global
@@ -20,16 +22,24 @@ function updateStyles(config) {
   if (config.hideOneHead) {
     cssContent += STYLES.hideOneHead + '\n';
   }
+  if (config.hideNavItems) {
+    cssContent += STYLES.hideNavItems + '\n';
+  }
+  if (config.hideQuoteHeader) {
+    cssContent += STYLES.hideQuoteHeader + '\n';
+  }
   
   styleElement.textContent = cssContent;
   console.log("Estilos actualizados:", config);
 }
 
 // Cargar configuración inicial
-chrome.storage.sync.get(['hideOneHead'], function(result) {
+chrome.storage.sync.get(['hideOneHead', 'hideNavItems', 'hideQuoteHeader'], function(result) {
   // Por defecto true si es undefined
   const config = {
-    hideOneHead: result.hideOneHead !== false
+    hideOneHead: result.hideOneHead !== false,
+    hideNavItems: result.hideNavItems !== false,
+    hideQuoteHeader: result.hideQuoteHeader !== false
   };
   updateStyles(config);
 });

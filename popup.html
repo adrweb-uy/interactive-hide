@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 250px;
+      padding: 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    h3 {
+      margin-top: 0;
+      color: #333;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+    .option {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .option label {
+      margin-left: 8px;
+      cursor: pointer;
+    }
+    .status {
+      font-size: 12px;
+      color: #666;
+      margin-top: 15px;
+      text-align: center;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h3>Configuración</h3>
+  
+  <div class="option">
+    <input type="checkbox" id="hideOneHead">
+    <label for="hideOneHead">Ocultar Cabecera (.one-head)</label>
+  </div>
+
+  <div id="status" class="status"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

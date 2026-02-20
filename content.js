@@ -3,24 +3,50 @@
 
 console.log("Extensión Interactive Hide cargada en: " + window.location.href);
 
-// Función para ocultar elementos
-function hideElements() {
-  // Aquí pondremos los selectores que el usuario nos indique
-  const selectors = [
-    // Ejemplo: '.banner-publicidad', '#header-molesto'
-  ];
+// Definir los estilos CSS para ocultar elementos
+const STYLES = {
+  hideOneHead: '.one-head { display: none !important; }'
+};
 
-  selectors.forEach(selector => {
-    const elements = document.querySelectorAll(selector);
-    elements.forEach(element => {
-      element.style.display = 'none';
-      console.log(`Ocultado: ${selector}`);
-    });
-  });
+// Crear elemento de estilo global
+const styleElement = document.createElement('style');
+styleElement.id = 'interactive-hide-styles';
+document.head.appendChild(styleElement);
+
+// Función para actualizar estilos según configuración
+function updateStyles(config) {
+  let cssContent = '';
+  
+  if (config.hideOneHead) {
+    cssContent += STYLES.hideOneHead + '\n';
+  }
+  
+  styleElement.textContent = cssContent;
+  console.log("Estilos actualizados:", config);
 }
 
-// Ejecutar al cargar y también observar cambios en el DOM (para SPAs)
-hideElements();
-const observer = new MutationObserver(hideElements);
-observer.observe(document.body, { childList: true, subtree: true });
+// Cargar configuración inicial
+chrome.storage.sync.get(['hideOneHead'], function(result) {
+  // Por defecto true si es undefined
+  const config = {
+    hideOneHead: result.hideOneHead !== false
+  };
+  updateStyles(config);
+});
+
+// Escuchar cambios desde el popup
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  if (request.action === "updateConfig") {
+    updateStyles(request.config);
+  }
+});
+
+// Escuchar cambios en storage (por si se cambia desde otra pestaña)
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+  if (namespace === 'sync' && changes.hideOneHead) {
+    const newValue = changes.hideOneHead.newValue;
+    updateStyles({ hideOneHead: newValue });
+  }
+});
+
 

@@ -1,6 +1,7 @@
 # Hide Elements Extension
 
-Esta es una extensión de Chrome para ocultar elementos específicos en una página web.
+Esta es una extensión de Chrome para ocultar elementos específicos en https://www.interactivebrokers.co.uk/.
+Esta extesion fue creada por que para comprar contratos de opciones hay muy poco espacio de vision.
 
 ## Instalación
 

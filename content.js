@@ -8,7 +8,8 @@ const STYLES = {
   hideOneHead: '.one-head { display: none !important; }',
   hideNavItems: '.nav-items__next-row.insetx-32.insety-12 { display: none !important; }',
   hideQuoteHeader: '.quote-details-header { display: none !important; }',
-  compactNavContainer: '.nav-container.insety-16.insetx-32 { max-height: 30px !important; overflow: hidden !important; }'
+  compactNavContainer: '.nav-container.insety-16.insetx-32 { max-height: 30px !important; overflow: hidden !important; }',
+  hideOpinion: 'body > div._pane._con.end.show > section > div > div.order-ticket__sidebar--container > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) { display: none !important; }'
 };
 
 // Crear elemento de estilo global
@@ -32,19 +33,23 @@ function updateStyles(config) {
   if (config.compactNavContainer) {
     cssContent += STYLES.compactNavContainer + '\n';
   }
+  if (config.hideOpinion) {
+    cssContent += STYLES.hideOpinion + '\n';
+  }
   
   styleElement.textContent = cssContent;
   console.log("Estilos actualizados:", config);
 }
 
 // Cargar configuración inicial
-chrome.storage.sync.get(['hideOneHead', 'hideNavItems', 'hideQuoteHeader', 'compactNavContainer'], function(result) {
+chrome.storage.sync.get(['hideOneHead', 'hideNavItems', 'hideQuoteHeader', 'compactNavContainer', 'hideOpinion'], function(result) {
   // Por defecto false si es undefined
   const config = {
     hideOneHead: result.hideOneHead === true,
     hideNavItems: result.hideNavItems === true,
     hideQuoteHeader: result.hideQuoteHeader === true,
-    compactNavContainer: result.compactNavContainer === true
+    compactNavContainer: result.compactNavContainer === true,
+    hideOpinion: result.hideOpinion === true
   };
   updateStyles(config);
 });
@@ -60,12 +65,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 chrome.storage.onChanged.addListener(function(changes, namespace) {
   if (namespace === 'sync') {
     // Re-leer toda la configuración para asegurar consistencia
-    chrome.storage.sync.get(['hideOneHead', 'hideNavItems', 'hideQuoteHeader', 'compactNavContainer'], function(result) {
+    chrome.storage.sync.get(['hideOneHead', 'hideNavItems', 'hideQuoteHeader', 'compactNavContainer', 'hideOpinion'], function(result) {
       const config = {
         hideOneHead: result.hideOneHead === true,
         hideNavItems: result.hideNavItems === true,
         hideQuoteHeader: result.hideQuoteHeader === true,
-        compactNavContainer: result.compactNavContainer === true
+        compactNavContainer: result.compactNavContainer === true,
+        hideOpinion: result.hideOpinion === true
       };
       updateStyles(config);
     });

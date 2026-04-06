@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const checkboxNavItems = document.getElementById('hideNavItems');
   const checkboxQuoteHeader = document.getElementById('hideQuoteHeader');
   const checkboxCompactNav = document.getElementById('compactNavContainer');
+  const checkboxHideOpinion = document.getElementById('hideOpinion');
   const statusDiv = document.getElementById('status');
 
   // Función genérica para guardar
@@ -11,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
       hideOneHead: checkboxOneHead.checked,
       hideNavItems: checkboxNavItems.checked,
       hideQuoteHeader: checkboxQuoteHeader.checked,
-      compactNavContainer: checkboxCompactNav.checked
+      compactNavContainer: checkboxCompactNav.checked,
+      hideOpinion: checkboxHideOpinion.checked
     };
     
     chrome.storage.sync.set(config, function() {
@@ -34,11 +36,12 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Cargar configuración guardada
-  chrome.storage.sync.get(['hideOneHead', 'hideNavItems', 'hideQuoteHeader', 'compactNavContainer'], function(result) {
+  chrome.storage.sync.get(['hideOneHead', 'hideNavItems', 'hideQuoteHeader', 'compactNavContainer', 'hideOpinion'], function(result) {
     checkboxOneHead.checked = result.hideOneHead === true; // Por defecto false
     checkboxNavItems.checked = result.hideNavItems === true; // Por defecto false
     checkboxQuoteHeader.checked = result.hideQuoteHeader === true; // Por defecto false
     checkboxCompactNav.checked = result.compactNavContainer === true; // Por defecto false
+    checkboxHideOpinion.checked = result.hideOpinion === true;
   });
 
   // Listeners
@@ -46,4 +49,5 @@ document.addEventListener('DOMContentLoaded', function() {
   checkboxNavItems.addEventListener('change', saveConfig);
   checkboxQuoteHeader.addEventListener('change', saveConfig);
   checkboxCompactNav.addEventListener('change', saveConfig);
+  checkboxHideOpinion.addEventListener('change', saveConfig);
 });

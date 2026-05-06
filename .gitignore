@@ -12,3 +12,6 @@ Thumbs.db
 
 # Extension build
 *.crx
+
+#Chrome Store
+interactive-hide.zip

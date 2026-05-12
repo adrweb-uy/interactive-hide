@@ -3,7 +3,7 @@
   "name": "Hide Elements Extension",
   "version": "1.0",
   "description": "Una extensión para ocultar elementos en una página web.",
-  "permissions": ["activeTab", "scripting", "storage"],
+  "permissions": ["activeTab", "storage"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
